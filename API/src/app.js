@@ -1,10 +1,9 @@
-require('dotenv').config();
-
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
-import useRoutes from './routers';
+import 'dotenv/config'
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import jwt from 'jsonwebtoken';
+import useRoutes from './routers/index.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
