@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+import useRoutes from './routers';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -21,10 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   })
 //   .catch((err) => console.log(err));
 // request handlers
-app.get('/', (req, res) => {
-  res.send('Welcome to the Node.js Tutorial! - ');
-});
-
+useRoutes(app);
 app.listen(port, () => {
   console.log('Server started on: ' + port);
 });
