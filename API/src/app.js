@@ -2,7 +2,6 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import jwt from "jsonwebtoken";
 import useRoutes from "./routers/index.js";
 import mongoose from "mongoose";
 import userModel from "./models/User.model.js";
@@ -30,12 +29,12 @@ mongoose
 const initAccount = async () => {
   const hashPass = await bcrypt.hash(process.env.PASSWORD, 10);
   try {
-    const checkAccount = await userModel.find({ userName: "tuantran" });
+    const checkAccount = await userModel.User.find({ userName: "tuantran" });
     if (checkAccount.length > 0) {
       console.log("đã tạo account ");
       return;
     }
-    const userAdmin = await userModel.create({
+    const userAdmin = await userModel.User.create({
       userName: "tuantran",
       password: hashPass,
     });

@@ -1,29 +1,36 @@
 //src/routes/root.tsx
 import {
-    Route,
-    createBrowserRouter,
-    createRoutesFromElements,
-  } from "react-router-dom";
-  import Home from "../pages/Home";
-  import Login from "../pages/Login";
-  import PrivateRoute from "./privateRouters";
-  
-  
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Navigate
+} from "react-router-dom";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import LogOut from "../pages/Login/logout";
+import PrivateRoute from "./privateRouters";
+
+
+const Router = () => {
+  const user = localStorage.getItem('user')
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        {/* public routes */}
-        <Route path="/login" element={<Login />} />
-        
-        {/* protect routes */}
+        <Route path="/login" element={user ? <Navigate to="/home" /> : <Login />} />
+
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
         </Route>
-        {/* catch all */}
-        <Route path="*" element={<h1>Page not found</h1>} />
+
+
+        <Route path="/logout" element={<LogOut />} />
+        <Route path="*" element={<Login />} />
       </Route>,
     ),
   );
-  
-  
-  export default router;
+  return router
+}
+
+
+
+export default Router;

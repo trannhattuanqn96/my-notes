@@ -1,7 +1,7 @@
-
+import useAuth from "../../hooks/useAuth";
 const Home = () => {
     return (
-        <div>abc</div>
+        <div>zzzzzzzzzzzzz</div>
     )
 }
 

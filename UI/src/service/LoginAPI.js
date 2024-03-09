@@ -1,19 +1,19 @@
 // Trong file nơi bạn muốn sử dụng hàm loginAPI, ví dụ: api.js
 import axios from 'axios';
-
+import dataConfig from '../config';
 // Tạo một instance của Axios với cấu hình mặc định
 const axiosInstance = axios.create({
-  baseURL: 'https://api.example.com', // Thay đổi thành baseURL của bạn
+  baseURL: dataConfig.baseURLAPI, // Thay đổi thành baseURL của bạn
   timeout: 5000, // Thời gian chờ tối đa cho mỗi yêu cầu (5 giây trong ví dụ này)
 });
 // Hàm loginAPI gọi API đăng nhập và trả về kết quả
-async function loginAPI(username, password) {
+async function loginAPI({userName, password}) {
   try {
-    const response = await axiosInstance.post('/api/login', { username, password });
-    return response.data;
+    const response = await axiosInstance.post('/login', {userName,password});
+    return response;
   } catch (error) {
     // Xử lý lỗi khi gọi API
-    throw new Error('Failed to login');
+    return error.response;
   }
 }
 

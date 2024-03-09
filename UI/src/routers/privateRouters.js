@@ -4,10 +4,9 @@ import useAuth from "../hooks/useAuth";
 
 
 const PrivateRoute = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const user = localStorage.getItem('user')
   const location = useLocation();
-
-
   return user ? (
     <Outlet />
   ) : (

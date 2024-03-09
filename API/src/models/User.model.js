@@ -8,4 +8,10 @@ const UserSchema = new Schema(
   }
 );
 const User = mongoose.model('user', UserSchema);
-export default User;
+
+const getUser = (userName) => {
+  const user = User.findOne({ userName: userName })
+  return user;
+
+}
+export default { User, getUser };
