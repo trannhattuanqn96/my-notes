@@ -12,11 +12,11 @@ import PrivateRoute from "./privateRouters";
 
 
 const Router = () => {
-  const user = localStorage.getItem('user')
+  const mynote = localStorage.getItem('mynote')
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        <Route path="/login" element={user ? <Navigate to="/home" /> : <Login />} />
+        <Route path="/login" element={mynote ? <Navigate to="/home" /> : <Login />} />
 
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />

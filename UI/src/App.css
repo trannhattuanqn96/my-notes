@@ -8,6 +8,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #8793ac !important;
 }
 
 code {
@@ -38,4 +39,20 @@ code {
 }
 .header .active {
   color: #2c7613;
+}
+/* Tệp CSS của bạn */
+.light-black {
+  --light-black: #333333;
+}
+
+.light-gray {
+  --light-gray: #999999;
+}
+
+.light-white {
+  --light-white: #CCCCCC;
+}
+
+.bg-gradient-to-b {
+  background: linear-gradient(to bottom, var(--light-black), var(--light-gray), var(--light-white));
 }
