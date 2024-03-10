@@ -7,7 +7,7 @@ if (process.env.ENVIRONMENT === 'dev') {
     }
 } else {
     dataConfig = {
-        baseURLAPI: 'http://localhost:4000'
+        baseURLAPI: 'http://mynote.tuandevzz77.io.vn/api'
     }
 }
 
