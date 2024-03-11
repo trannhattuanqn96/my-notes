@@ -6,11 +6,16 @@ import useRoutes from "./routers/index.js";
 import mongoose from "mongoose";
 import userModel from "./models/User.model.js";
 import bcrypt from "bcrypt";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
 // enable CORS
-app.use(cors());
+var corsOptions = {
+  origin: "*",
+}
+app.use(cors(corsOptions));
 // parse application/json
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
