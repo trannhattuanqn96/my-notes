@@ -10,6 +10,7 @@ const axiosInstance = axios.create({
 
 // Hàm loginAPI gọi API đăng nhập và trả về kết quả
 async function loginAPI({userName, password}) {
+  console.log(userName, password)
   try {
     const response = await axiosInstance.post('/login', {userName,password});
     return response;
