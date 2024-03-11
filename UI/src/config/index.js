@@ -7,7 +7,7 @@ if (process.env.ENVIRONMENT === 'dev') {
     }
 } else {
     dataConfig = {
-        baseURLAPI: 'http://mynoteapi.tuandevzz77.io.vn'
+        baseURLAPI: 'http://mynote.tuandevzz77.io.vn/api'
     }
 }
 
