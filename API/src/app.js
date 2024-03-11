@@ -25,7 +25,7 @@ mongoose
     console.log("connected database");
   })
   .catch((err) => console.log(err));
-
+console.log(process.env.PASSWORD)
 const initAccount = async () => {
   const hashPass = await bcrypt.hash(process.env.PASSWORD, 10);
   try {

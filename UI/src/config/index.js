@@ -1,7 +1,7 @@
 
 
 let dataConfig = {}
-if (process.env.ENVIRONMENT === 'dev') {
+if (process.env.REACT_APP_ENVIRONMENT === 'dev') {
     dataConfig = {
         baseURLAPI: 'http://localhost:4000'
     }

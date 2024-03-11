@@ -11,7 +11,7 @@ const Login = async (req, res) => {
       message: "Tên đăng nhập không tồn tại",
     });
   }
-
+  console.log(process.env.JWT_SECRET)
   const isPasswordValid = bcrypt.compareSync(password, user.password);
   if (!isPasswordValid) {
     return res.status(401).json({
