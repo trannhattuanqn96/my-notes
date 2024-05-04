@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import userModel from "./models/User.model.js";
 import bcrypt from "bcrypt";
 import dotenv from 'dotenv';
+import { configMongo } from "./config/mongodb.js";
 dotenv.config();
 
 const app = express();
@@ -22,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose
-  .connect("mongodb://mynotes:mynotespwd@103.37.61.100:27017/my-notes", {
+  .connect(configMongo.baseUrl, {
     retryWrites: true,
     w: "majority",
   })

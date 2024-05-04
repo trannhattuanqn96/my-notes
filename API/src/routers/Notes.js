@@ -9,7 +9,7 @@ import {
 const router = Router();
 
 router.post("/create", createNotes);
-router.post("/get", getNotes);
+// router.get("/get", getNotes);
 router.delete("/delete/:id", deleteNotes);
 router.post("/update", updateNotes);
 
