@@ -19,11 +19,13 @@ axiosInstance.interceptors.request.use(
     }
 );
 
-async function createNotes(title, content) {
+async function createNotes(title, content, tag, description) {
     try {
         const response = await axiosInstance.post("/notes/create", {
             title,
-            content
+            content,
+            tag,
+            description,
         });
         return response;
     } catch (error) {
@@ -33,7 +35,7 @@ async function createNotes(title, content) {
 // Hàm loginAPI gọi API đăng nhập và trả về kết quả
 async function getNotes(search = null) {
     try {
-        const response = await axiosInstance.post("/notes/get", {
+        const response = await axiosInstance.get("/notes/get", {
             search,
         });
         return response;
@@ -50,4 +52,12 @@ async function deleteNote(id) {
         return error.response;
     }
 }
-export { getNotes, deleteNote, createNotes };
+const getDetailNoteById = async (id) => {
+    try {
+        const response = await axiosInstance.get(`/notes/get/${id}`);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+};
+export { getNotes, deleteNote, createNotes, getDetailNoteById };

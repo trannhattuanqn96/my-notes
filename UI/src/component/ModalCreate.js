@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useContext, useEffect } from "react";
 import {
     ModalHeader,
     ModalDescription,
@@ -16,6 +16,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { toast } from "react-toastify";
 import { createNotes } from "../service/notesAPI";
 import AuthContext from "../context/authContext/AuthProvider";
+import { Chip } from "@nextui-org/react";
 
 const ModalCreate = (prop) => {
     const { setRefesh } = useContext(AuthContext);
@@ -23,21 +24,52 @@ const ModalCreate = (prop) => {
 
     const editorRef = useRef(null);
     const [title, setTitle] = useState("");
+    const [tag, setTag] = useState([]);
+    const [currValueTag, setCurrValueTag] = useState("");
+    const [description, setDescription] = useState(null);
 
     const handleCreateNote = async () => {
         if (!title || !editorRef.current.getContent()) {
-            toast("Không được để trống", { autoClose: 1000 });
+            toast("Tiêu đề không được để trống", { autoClose: 1000 });
+            return;
         }
         const createNote = await createNotes(
             title,
-            editorRef.current.getContent()
+            editorRef.current.getContent(),
+            tag,
+            description
         );
         if (createNote.data.code === 0) {
             toast("Lưu note không thành công", { autoClose: 1000 });
         }
         toast("Lưu note thành công", { autoClose: 1000 });
-        setRefesh(true)
+        setRefesh(true);
         setIsOpenModal(false);
+        setTag([]);
+        setDescription(null);
+    };
+    const handleKeyUpTag = (e) => {
+        if (e.keyCode === 32) {
+            if (e.target.value.trim() === "") {
+                return;
+            }
+            setTag((oldState) => [...oldState, e.target.value.trim()]);
+            setCurrValueTag("");
+        }
+    };
+    useEffect(() => {
+        console.log(tag);
+    }, [tag]);
+
+    const handleChange = (e) => {
+        setCurrValueTag(e.target.value);
+    };
+
+    const handleDelete = (item, index) => {
+        let arr = [...tag];
+        arr.splice(index, 1);
+        console.log(item);
+        setTag(arr);
     };
     return (
         <>
@@ -57,6 +89,41 @@ const ModalCreate = (prop) => {
                                     onChange={(e) => setTitle(e.target.value)}
                                 />
                             </FormField>
+                            <FormField>
+                                <div className=" flex items-center gap-2  flex-wrap flex-row border-2 p-4 rounded ">
+                                    <Input
+                                        value={currValueTag}
+                                        onChange={handleChange}
+                                        onKeyDown={handleKeyUpTag}
+                                        placeholder="Tag"
+                                    />
+                                    {tag.map((item, index) => (
+                                        <>
+                                            <div className="gap-6 flex flex-row flex-wrap">
+                                                <Chip
+                                                    onClose={() =>
+                                                        handleDelete(
+                                                            item,
+                                                            index
+                                                        )
+                                                    }
+                                                    className="bg-gray-500 px-2 py-1 rounded-md text-white"
+                                                >
+                                                    {item}
+                                                </Chip>
+                                            </div>
+                                        </>
+                                    ))}
+                                </div>
+                            </FormField>
+                            <FormField>
+                                <Input
+                                    placeholder="Mô tả"
+                                    onChange={(e) =>
+                                        setDescription(e.target.value)
+                                    }
+                                />
+                            </FormField>
                             <Editor
                                 apiKey="2fbonljqeyt6v92j1jnq0szb9xelpoomqz7etfuj3nzf3l8u"
                                 onInit={(evt, editor) =>
@@ -64,24 +131,25 @@ const ModalCreate = (prop) => {
                                 }
                                 init={{
                                     plugins:
-                                        "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss",
+                                        "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker   ",
                                     toolbar:
-                                        "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-                                    tinycomments_mode: "embedded",
-                                    tinycomments_author: "Author name",
-                                    mergetags_list: [
+                                        "undo redo |  fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight |  numlist bullist indent outdent | emoticons charmap | removeformat codesample",
+                                    codesample_global_prismjs: true,
+                                    codesample_languages: [
+                                        { text: "HTML/XML", value: "markup" },
                                         {
-                                            value: "First.Name",
-                                            title: "First Name",
+                                            text: "JavaScript",
+                                            value: "javascript",
                                         },
-                                        { value: "Email", title: "Email" },
+                                        { text: "CSS", value: "css" },
+                                        { text: "PHP", value: "php" },
+                                        { text: "Ruby", value: "ruby" },
+                                        { text: "Python", value: "python" },
+                                        { text: "Java", value: "java" },
+                                        { text: "C", value: "c" },
+                                        { text: "C#", value: "csharp" },
+                                        { text: "C++", value: "cpp" },
                                     ],
-                                    ai_request: (request, respondWith) =>
-                                        respondWith.string(() =>
-                                            Promise.reject(
-                                                "See docs to implement AI Assistant"
-                                            )
-                                        ),
                                 }}
                             />
                         </Form>

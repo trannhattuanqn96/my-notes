@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { BsTrashFill } from "react-icons/bs";
 import { MdModeEditOutline } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,7 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { getNotes } from "../../service/notesAPI.js";
 import ModalDelete from "../../component/ModalDelete.js";
 import ModalCreate from "../../component/ModalCreate.js";
-import AuthContext from "../../context/authContext/AuthProvider.js"
+import AuthContext from "../../context/authContext/AuthProvider.js";
+import parse from "html-react-parser";
 
 const Home = () => {
     const { refesh, setRefesh } = useContext(AuthContext);
@@ -32,7 +33,7 @@ const Home = () => {
                     toast("Không lấy được nội dung!", { autoClose: 1000 });
                     return;
                 }
-                setRefesh(false)
+                setRefesh(false);
                 setData(response.data.data);
             } catch (error) {
                 // Xử lý lỗi nếu có
@@ -42,12 +43,12 @@ const Home = () => {
     }, [refesh]); // Đảm bảo useEffect chỉ chạy một lần khi component được render
 
     const handleCreateNote = () => {
-        setIsOpenModalCreate(true)
+        setIsOpenModalCreate(true);
     };
     return (
         <>
             <ToastContainer />
-            <div className="">
+            <div className="h-screen bg-slate-500">
                 <div className="relative container mx-auto w-8/12 mb-[20px] pt-[20px]">
                     <div>
                         <input
@@ -62,7 +63,7 @@ const Home = () => {
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-5"
                         onClick={handleCreateNote}
                     >
-                        Theem
+                        Thêm
                     </button>
                 </div>
 
@@ -78,7 +79,7 @@ const Home = () => {
                                                     {item?.title}
                                                 </h4>
                                                 <p className="text-gray-800 dark:text-gray-100 text-sm">
-                                                    {item?.content}
+                                                    {item?.description}
                                                 </p>
                                             </div>
                                             <div>
@@ -122,13 +123,10 @@ const Home = () => {
                 note={note}
                 setNote={setNote}
             />
-             <ModalCreate
+            <ModalCreate
                 modalIsOpen={isOpenModalCreate}
                 setIsOpenModal={setIsOpenModalCreate}
-                
             />
-
-
         </>
     );
 };

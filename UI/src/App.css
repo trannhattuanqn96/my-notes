@@ -2,57 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #8793ac !important;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* background-color: #8793ac !important; */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+    display: block;
+    text-wrap: wrap !important;
+    padding: 2px 20px;
 }
 
+pre {
+    background-color: #edf2f4;
+}
 .content {
-  padding: 20px;
+    padding: 20px;
 }
 
 .header {
-  padding: 10px;
-  background: #edf2f4;
-  border-bottom: 1px solid #999;
+    padding: 10px;
+    background: #edf2f4;
+    border-bottom: 1px solid #999;
 }
 .header a {
-  color: #0072ff;
-  text-decoration: none;
-  margin-left: 20px;
-  margin-right: 5px;
+    color: #0072ff;
+    text-decoration: none;
+    margin-left: 20px;
+    margin-right: 5px;
 }
 .header a:hover {
-  color: #8a0f53;
+    color: #8a0f53;
 }
 .header small {
-  color: #666;
+    color: #666;
 }
 .header .active {
-  color: #2c7613;
+    color: #2c7613;
 }
 /* Tệp CSS của bạn */
 .light-black {
-  --light-black: #333333;
+    --light-black: #333333;
 }
 
 .light-gray {
-  --light-gray: #999999;
+    --light-gray: #999999;
 }
 
 .light-white {
-  --light-white: #CCCCCC;
+    --light-white: #cccccc;
 }
 
 .bg-gradient-to-b {
-  background: linear-gradient(to bottom, var(--light-black), var(--light-gray), var(--light-white));
+    background: linear-gradient(
+        to bottom,
+        var(--light-black),
+        var(--light-gray),
+        var(--light-white)
+    );
 }

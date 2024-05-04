@@ -9,6 +9,8 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import LogOut from "../pages/Login/logout";
 import PrivateRoute from "./privateRouters";
+import Notes from "../pages/Notes";
+import DetailNote from "../pages/Notes/detail-note";
 
 
 const Router = () => {
@@ -17,6 +19,9 @@ const Router = () => {
     createRoutesFromElements(
       <Route>
         <Route path="/login" element={mynote ? <Navigate to="/home" /> : <Login />} />
+
+        <Route path="/notes" element={ <Notes />} />
+        <Route path="/notes/:id" element={ < DetailNote/>} />
 
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />
