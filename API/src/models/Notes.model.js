@@ -82,12 +82,14 @@ const deleteNotes = async (id) => {
     }
 };
 
-const updateNotes = async (id, title, content) => {
+const updateNotes = async (id, title, content, tag, description) => {
     //check id
     try {
         const updateNotes = await Notes.findByIdAndUpdate(id, {
             title,
             content,
+            tag,
+            description
         });
         if (!updateNotes) {
             return {

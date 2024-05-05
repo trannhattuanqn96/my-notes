@@ -38,7 +38,8 @@ const deleteNotes = async (req, res) => {
 };
 
 const updateNotes = async (req, res) => {
-    const { id, title, content } = req.body;
+    console.log(req.body);
+    const { id, title, content, tag, description } = req.body;
 
     if (!id || !title || !content) {
         return res.status(200).json({
@@ -47,7 +48,13 @@ const updateNotes = async (req, res) => {
         });
     }
 
-    const updateNote = await NotesModel.updateNote(id, title, content);
+    const updateNote = await NotesModel.updateNotes(
+        id,
+        title,
+        content,
+        tag,
+        description
+    );
     return res.status(200).json(updateNote);
 };
 
@@ -56,4 +63,5 @@ const getNotesById = async (req, res) => {
     const getNotesById = await NotesModel.getNotesById(id);
     return res.status(200).json(getNotesById);
 };
+
 export { createNotes, getNotes, deleteNotes, updateNotes, getNotesById };
