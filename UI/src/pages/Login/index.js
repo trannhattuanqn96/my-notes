@@ -1,16 +1,13 @@
 // LoginForm.js
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
 import { loginAPI } from "../../service/authAPI.js";
-import { AuthContext } from "../../context/authContext/AuthProvider";
-import useAuth from "../../hooks/useAuth.js";
+
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
   const [dataLogin, setDataLogin] = useState({
     userName: "",
     password: "",
@@ -30,7 +27,7 @@ const LoginForm = () => {
     }
     // Lưu thông tin người dùng bằng cách sử dụng Context
     localStorage.setItem("mynote", JSON.stringify(response.data.data));
-    navigate("/home");
+    navigate("/admin/home");
   };
 
   return (

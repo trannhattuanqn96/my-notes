@@ -1,18 +1,22 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import { BsTrashFill } from "react-icons/bs";
 import { MdModeEditOutline } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
-
+import moment from "moment/moment.js";
 import "react-toastify/dist/ReactToastify.css";
 
 import { getNotes } from "../../service/notesAPI.js";
 import ModalDelete from "../../component/ModalDelete.js";
 import ModalCreate from "../../component/ModalCreate.js";
-import AuthContext from "../../context/authContext/AuthProvider.js";
-import parse from "html-react-parser";
+import AuthContext from "../../context/authContext/RefeshProvider.js";
+import ModelEdit from "../../component/ModelEdit.js";
+import { Button } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+    const navigate = useNavigate();
+
     const { refesh, setRefesh } = useContext(AuthContext);
 
     const [data, setData] = useState([]);
@@ -23,6 +27,8 @@ const Home = () => {
     const [note, setNote] = useState(null);
     //create
     const [isOpenModalCreate, setIsOpenModalCreate] = useState(false);
+    //edit
+    const [isOpenModalEdit, setIsOpenModalEdit] = useState(false);
 
     useEffect(() => {
         const getnotes = async (search) => {
@@ -45,12 +51,27 @@ const Home = () => {
     const handleCreateNote = () => {
         setIsOpenModalCreate(true);
     };
+    const getNoteEdit = useCallback(
+        (note) => {
+            return data.map((item) => (item._id === note ? item : []));
+        },
+        [isOpenModalEdit]
+    );
+
+    const handleEditNote = () => {
+        setIsOpenModalEdit(true);
+    };
+    const handleLogout = () =>{
+        // Xóa mục trong localStorage và chuyển hướng đến "/login"
+        localStorage.removeItem("mynote");
+        navigate("/admin/login");
+    }
     return (
         <>
             <ToastContainer />
             <div className="h-screen bg-slate-500">
-                <div className="relative container mx-auto w-8/12 mb-[20px] pt-[20px]">
-                    <div>
+                <div className=" container mx-auto w-8/12 mb-[20px] pt-[20px]">
+                    <div className="flex gap-10 ">
                         <input
                             type="search"
                             id="default-search"
@@ -58,6 +79,7 @@ const Home = () => {
                             placeholder="Search Mockups, Logos..."
                             required
                         />
+                        <Button color="primary" className="h-auto" onClick={() => handleLogout()}>Logout</Button>
                     </div>
                     <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-5"
@@ -69,27 +91,31 @@ const Home = () => {
 
                 <div className="mx-auto container py-20 px-6">
                     <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {data?.map((item, key) => {
+                        {data?.map((item) => {
                             return (
                                 <>
-                                    <div className="rounded" key={key}>
+                                    <div className="rounded" key={item?._id}>
                                         <div className="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:border-gray-700 rounded-lg border border-gray-400 mb-6 py-5 px-4">
                                             <div>
-                                                <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-3 border-b-[4px] border-solid border-black">
+                                                <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-3  text-[20px] border-b-[4px] border-solid border-black">
                                                     {item?.title}
                                                 </h4>
-                                                <p className="text-gray-800 dark:text-gray-100 text-sm">
+                                                <p className="text-gray-800 dark:text-gray-100 text-sm text-[18px]">
                                                     {item?.description}
                                                 </p>
                                             </div>
                                             <div>
                                                 <div className="flex items-center justify-between text-gray-800 dark:text-gray-100">
                                                     <p className="text-sm">
-                                                        {item?.createAt}
+                                                        {moment(
+                                                            item?.createAt
+                                                        ).format(
+                                                            "DD-MM-YYYY HH:mm:ss"
+                                                        )}
                                                     </p>
                                                     <button
                                                         className="w-8 h-8 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-black"
-                                                        aria-label="edit note"
+                                                        aria-label="remove note"
                                                         role="button"
                                                         onClick={() => {
                                                             setNote(item?._id);
@@ -104,6 +130,10 @@ const Home = () => {
                                                         className="w-8 h-8 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-black"
                                                         aria-label="edit note"
                                                         role="button"
+                                                        onClick={() => {
+                                                            setNote(item?._id);
+                                                            handleEditNote();
+                                                        }}
                                                     >
                                                         <MdModeEditOutline />
                                                     </button>
@@ -126,6 +156,12 @@ const Home = () => {
             <ModalCreate
                 modalIsOpen={isOpenModalCreate}
                 setIsOpenModal={setIsOpenModalCreate}
+            />
+            <ModelEdit
+                modalIsOpen={isOpenModalEdit}
+                setIsOpenModal={setIsOpenModalEdit}
+                noteEdit={getNoteEdit(note)}
+                setNote={setNote}
             />
         </>
     );

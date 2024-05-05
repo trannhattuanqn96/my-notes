@@ -12,42 +12,46 @@ import {
     Input,
 } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
-import { Editor } from "@tinymce/tinymce-react";
 import { toast } from "react-toastify";
-import { createNotes } from "../service/notesAPI";
+import { updateDetailNoteById } from "../service/notesAPI";
 import AuthContext from "../context/authContext/RefeshProvider";
 import { Chip } from "@nextui-org/react";
 import EditorTiny from "./EditorTiny";
-const ModalCreate = (prop) => {
+const ModelEdit = (prop) => {
     const { setRefesh } = useContext(AuthContext);
-    const { modalIsOpen, setIsOpenModal } = prop;
-
+    const { modalIsOpen, setIsOpenModal, noteEdit } = prop;
     const editorRef = useRef(null);
-    const [title, setTitle] = useState("");
-    const [tag, setTag] = useState([]);
+    const [title, setTitle] = useState(noteEdit[0]?.title);
+    const [tag, setTag] = useState(noteEdit[0]?.tag);
     const [currValueTag, setCurrValueTag] = useState("");
-    const [description, setDescription] = useState(null);
+    const [description, setDescription] = useState(noteEdit[0]?.description);
 
-    const handleCreateNote = async () => {
+    const handleEditNote = async () => {
         if (!title || !editorRef.current.getContent()) {
             toast("Tiêu đề không được để trống", { autoClose: 1000 });
             return;
         }
-        const createNote = await createNotes(
+        const createNote = await updateDetailNoteById({
+            id: noteEdit[0]?._id,
             title,
-            editorRef.current.getContent(),
+            content: editorRef.current.getContent(),
             tag,
-            description
-        );
+            description,
+        });
         if (createNote.data.code === 0) {
-            toast("Lưu note không thành công", { autoClose: 1000 });
+            toast("Sửa note không thành công", { autoClose: 1000 });
         }
-        toast("Lưu note thành công", { autoClose: 1000 });
+        toast("Sửa note thành công", { autoClose: 1000 });
         setRefesh(true);
         setIsOpenModal(false);
         setTag([]);
         setDescription(null);
     };
+    useEffect(() => {
+        setTitle(noteEdit[0]?.title)
+        setTag(noteEdit[0]?.tag)
+        setDescription(noteEdit[0]?.description)
+    },[modalIsOpen])
     const handleKeyUpTag = (e) => {
         if (e.keyCode === 32) {
             if (e.target.value.trim() === "") {
@@ -57,9 +61,6 @@ const ModalCreate = (prop) => {
             setCurrValueTag("");
         }
     };
-    useEffect(() => {
-        console.log(tag);
-    }, [tag]);
 
     const handleChange = (e) => {
         setCurrValueTag(e.target.value);
@@ -79,7 +80,7 @@ const ModalCreate = (prop) => {
                 onOpen={() => setIsOpenModal(true)}
                 style={{ width: "80%" }}
             >
-                <ModalHeader>Thêm</ModalHeader>
+                <ModalHeader>Sửa</ModalHeader>
                 <ModalContent scrolling className="">
                     <ModalDescription>
                         <Form>
@@ -87,6 +88,7 @@ const ModalCreate = (prop) => {
                                 <Input
                                     placeholder="Tiêu đề"
                                     onChange={(e) => setTitle(e.target.value)}
+                                    value={title}
                                 />
                             </FormField>
                             <FormField>
@@ -97,7 +99,7 @@ const ModalCreate = (prop) => {
                                         onKeyDown={handleKeyUpTag}
                                         placeholder="Tag"
                                     />
-                                    {tag.map((item, index) => (
+                                    {tag?.map((item, index) => (
                                         <>
                                             <div className="gap-6 flex flex-row flex-wrap">
                                                 <Chip
@@ -122,16 +124,21 @@ const ModalCreate = (prop) => {
                                     onChange={(e) =>
                                         setDescription(e.target.value)
                                     }
+                                    value={description}
                                 />
                             </FormField>
-                          
-                            <EditorTiny editorRef={editorRef} checkEdit={false}/>
+
+                            <EditorTiny
+                                editorRef={editorRef}
+                                checkEdit={true}
+                                initContent={noteEdit[0]?.content}
+                            />
                         </Form>
                     </ModalDescription>
                 </ModalContent>
                 <ModalActions>
-                    <Button primary onClick={() => handleCreateNote()}>
-                        Thêm <Icon name="right chevron" />
+                    <Button primary onClick={() => handleEditNote()}>
+                        Sửa <Icon name="right chevron" />
                     </Button>
                 </ModalActions>
             </Modal>
@@ -139,4 +146,4 @@ const ModalCreate = (prop) => {
     );
 };
 
-export default ModalCreate;
+export default ModelEdit;

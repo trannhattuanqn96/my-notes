@@ -9,7 +9,7 @@ import {
 import "semantic-ui-css/semantic.min.css";
 import { deleteNote } from "../service/notesAPI.js";
 import {  toast } from "react-toastify";
-import AuthContext from "../context/authContext/AuthProvider.js";
+import AuthContext from "../context/authContext/RefeshProvider.js";
 const ModalDelete = (prop) => {
   const { setRefesh } = useContext(AuthContext);
 

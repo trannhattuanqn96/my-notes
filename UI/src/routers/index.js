@@ -1,41 +1,40 @@
 //src/routes/root.tsx
 import {
-  Route,
-  createBrowserRouter,
-  createRoutesFromElements,
-  Navigate
+    Route,
+    createBrowserRouter,
+    createRoutesFromElements,
+    Navigate,
 } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-import LogOut from "../pages/Login/logout";
 import PrivateRoute from "./privateRouters";
 import Notes from "../pages/Notes";
 import DetailNote from "../pages/Notes/detail-note";
 
-
 const Router = () => {
-  const mynote = localStorage.getItem('mynote')
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route>
-        <Route path="/login" element={mynote ? <Navigate to="/home" /> : <Login />} />
+    const mynote = localStorage.getItem("mynote");
+    const router = createBrowserRouter(
+        createRoutesFromElements(
+            <Route>
+                {/* for admin */}
 
-        <Route path="/notes" element={ <Notes />} />
-        <Route path="/notes/:id" element={ < DetailNote/>} />
+                <Route
+                    path="/admin/login"
+                    element={mynote ? <Navigate to="/admin/home" /> : <Login />}
+                />
+                <Route element={<PrivateRoute />}>
+                    <Route path="/admin/home" element={<Home />} />
+                </Route>
 
-        <Route element={<PrivateRoute />}>
-          <Route path="/home" element={<Home />} />
-        </Route>
+                {/* for clien  */}
+                <Route path="/notes" element={<Notes />} />
+                <Route path="/notes/:id" element={<DetailNote />} />
 
-
-        <Route path="/logout" element={<LogOut />} />
-        <Route path="*" element={<Login />} />
-      </Route>,
-    ),
-  );
-  return router
-}
-
-
+                <Route path="*" element={<Navigate to="/admin/login" />} />
+            </Route>
+        )
+    );
+    return router;
+};
 
 export default Router;

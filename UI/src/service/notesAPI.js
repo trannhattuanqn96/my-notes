@@ -3,7 +3,12 @@ import axios from "axios";
 import dataConfig from "../config";
 // Tạo một instance của Axios với cấu hình mặc định
 const axiosInstance = axios.create({
-    baseURL: dataConfig.baseURLAPI, // Thay đổi thành baseURL của bạn
+    baseURL: dataConfig.baseURLAPI, // Thay đổi thành baseURL 
+    timeout: 5000, // Thời gian chờ tối đa cho mỗi yêu cầu (5 giây trong ví dụ này)
+});
+
+const axiosInstanceWithoutToken =  axios.create({
+    baseURL: dataConfig.baseURLAPI, // Thay đổi thành baseURL 
     timeout: 5000, // Thời gian chờ tối đa cho mỗi yêu cầu (5 giây trong ví dụ này)
 });
 
@@ -35,7 +40,7 @@ async function createNotes(title, content, tag, description) {
 // Hàm loginAPI gọi API đăng nhập và trả về kết quả
 async function getNotes(search = null) {
     try {
-        const response = await axiosInstance.get("/notes/get", {
+        const response = await axiosInstanceWithoutToken.get("/notes/get", {
             search,
         });
         return response;
@@ -54,10 +59,19 @@ async function deleteNote(id) {
 }
 const getDetailNoteById = async (id) => {
     try {
-        const response = await axiosInstance.get(`/notes/get/${id}`);
+        const response = await axiosInstanceWithoutToken.get(`/notes/get/${id}`);
         return response;
     } catch (error) {
         return error.response;
     }
 };
-export { getNotes, deleteNote, createNotes, getDetailNoteById };
+
+const updateDetailNoteById = async (data) => {
+    try {
+        const response = await axiosInstance.post(`/notes/update`, data);
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+export { getNotes, deleteNote, createNotes, getDetailNoteById,updateDetailNoteById };

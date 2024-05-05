@@ -1,15 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
-import { AuthProvider } from "./context/authContext/AuthProvider";
+import { RefeshProvider } from "./context/authContext/RefeshProvider";
 import Router from "./routers";
 import { NextUIProvider } from "@nextui-org/react";
 function App() {
     return (
         <NextUIProvider>
-            <AuthProvider>
+            <RefeshProvider>
                 <RouterProvider router={Router()} />
-            </AuthProvider>
+            </RefeshProvider>
         </NextUIProvider>
     );
 }

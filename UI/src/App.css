@@ -10,6 +10,17 @@ body {
     -moz-osx-font-smoothing: grayscale;
     /* background-color: #8793ac !important; */
 }
+.tox .tox-tbtn svg {
+    fill: black !important;
+}
+/* text color */
+#tinymce {
+    color: #dd9900 !important;
+}
+
+.mce-content-body {
+    background: #1a1a1a !important;
+}
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -66,4 +77,8 @@ pre {
         var(--light-gray),
         var(--light-white)
     );
+}
+
+.mce-content-body {
+    background: #272822;
 }

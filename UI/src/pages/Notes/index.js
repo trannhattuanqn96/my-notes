@@ -16,15 +16,18 @@ const Notes = () => {
     useEffect(() => {
         getListNotes();
     }, []);
+    console.log(getList)
     return (
         <>
             <ToastContainer />
-
             <div className="h-screen bg-[#1F2028]">
                 <div className="pt-40 px-40">
                     {getList?.map((item) => {
                         return (
-                            <div className="text-red-600 border-[1px] bg-[#1a1a1a] rounded-[1rem] shadow-md p-[20px]">
+                            <div
+                                key={item?._id}
+                                className="text-red-600 border-[1px] bg-[#1a1a1a] rounded-[1rem] shadow-md p-[20px] mb-[20px]"
+                            >
                                 <Link to={item?._id} title={item?.title}>
                                     <h1>{item?.title}</h1>
                                     <p>{item?.description}</p>
