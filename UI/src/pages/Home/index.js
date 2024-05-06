@@ -12,7 +12,7 @@ import ModalCreate from "../../component/ModalCreate.js";
 import AuthContext from "../../context/authContext/RefeshProvider.js";
 import ModelEdit from "../../component/ModelEdit.js";
 import { Button } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -64,7 +64,7 @@ const Home = () => {
     const handleLogout = () =>{
         // Xóa mục trong localStorage và chuyển hướng đến "/login"
         localStorage.removeItem("mynote");
-        navigate("/admin/login");
+        <Navigate to="/admin/login" replace={true} />
     }
     return (
         <>
