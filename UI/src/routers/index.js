@@ -13,15 +13,15 @@ import DetailNote from "../pages/Notes/detail-note";
 
 const Router = () => {
     const mynote = localStorage.getItem("mynote");
+    console.log(mynote);
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route>
                 {/* for admin */}
 
-                <Route
-                    path="/admin/login"
-                    element={mynote ? <Navigate to="/admin/home" /> : <Login />}
-                />
+                <Route path="/admin/login" element={<Login />} />
+
+                {/* <Route path="/admin/login" element={<Login />} /> */}
                 <Route element={<PrivateRoute />}>
                     <Route path="/admin/home" element={<Home />} />
                 </Route>

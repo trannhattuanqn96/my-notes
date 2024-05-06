@@ -3,11 +3,12 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 // import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { verifyToken } from "../service/authAPI";
-import { parsePath } from "history";
+
 const PrivateRoute = () => {
     // const { user } = useAuth();
+    const location = useLocation()
+    console.log(location)
     const [checkUser, setCheckUser] = useState(true);
-    const location = useLocation();
     //check tokeen
     useEffect(() => {
         const checkToken = async () => {
@@ -25,17 +26,16 @@ const PrivateRoute = () => {
                   setCheckUser(false);
                 }
             } catch (error) {
-                // Xử lý lỗi nếu có
                 setCheckUser(false);
             }
         };
 
-        checkToken(); // Gọi hàm async
-    }, []); // Đảm bảo useEffect chỉ chạy một lần khi component được render
+        checkToken();
+    }, []);
     return checkUser ? (
         <Outlet />
     ) : (
-        <Navigate to="/login" state={{ from: location }} replace />
+        <Navigate to="/admin/login" replace />
     );
 };
 
