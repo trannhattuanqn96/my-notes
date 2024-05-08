@@ -14,7 +14,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 // enable CORS
 var corsOptions = {
-  origin: "*",
+  origin: "http://notes.tuandevzz77.site/",
 }
 app.use(cors(corsOptions));
 // parse application/json
