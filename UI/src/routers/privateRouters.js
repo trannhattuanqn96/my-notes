@@ -5,15 +5,11 @@ import { useEffect, useState } from "react";
 import { verifyToken } from "../service/authAPI";
 
 const PrivateRoute = () => {
-    // const { user } = useAuth();
-    const location = useLocation()
-    console.log(location)
     const [checkUser, setCheckUser] = useState(true);
     //check tokeen
     useEffect(() => {
         const checkToken = async () => {
             try {
-                // Thực hiện các công việc bất đồng bộ ở đây
                 if (localStorage.getItem("mynote")) {
                     const { user, accessToken } = JSON.parse(
                         localStorage.getItem("mynote")

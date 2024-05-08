@@ -64,7 +64,7 @@ const Home = () => {
     const handleLogout = () =>{
         // Xóa mục trong localStorage và chuyển hướng đến "/login"
         localStorage.removeItem("mynote");
-        <Navigate to="/admin/login" replace={true} />
+        navigate('/admin/login')
     }
     return (
         <>

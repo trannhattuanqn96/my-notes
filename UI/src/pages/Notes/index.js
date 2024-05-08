@@ -16,7 +16,6 @@ const Notes = () => {
     useEffect(() => {
         getListNotes();
     }, []);
-    console.log(getList)
     return (
         <>
             <ToastContainer />

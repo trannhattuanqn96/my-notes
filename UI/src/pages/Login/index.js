@@ -3,16 +3,30 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import { loginAPI } from "../../service/authAPI.js";
+import { loginAPI, verifyToken } from "../../service/authAPI.js";
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    useEffect(() => {
+
+    const check = async () => {
         const mynote = localStorage.getItem("mynote");
         if (mynote) {
-            navigate("/admin/home");
+            const { user, accessToken } = JSON.parse(
+                localStorage.getItem("mynote")
+            );
+            const response = await verifyToken(user, accessToken);
+            if (!response.data.data.valid) {
+                navigate("/admin/login");
+            } else {
+                navigate("/admin/home");
+            }
         }
-    },[]);
+        
+    }
+    useEffect(() => {
+        check()
+    });
+
     const [dataLogin, setDataLogin] = useState({
         userName: "",
         password: "",

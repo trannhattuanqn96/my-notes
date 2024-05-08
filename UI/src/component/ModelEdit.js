@@ -69,7 +69,6 @@ const ModelEdit = (prop) => {
     const handleDelete = (item, index) => {
         let arr = [...tag];
         arr.splice(index, 1);
-        console.log(item);
         setTag(arr);
     };
     return (

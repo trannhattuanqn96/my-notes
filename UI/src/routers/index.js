@@ -12,8 +12,6 @@ import Notes from "../pages/Notes";
 import DetailNote from "../pages/Notes/detail-note";
 
 const Router = () => {
-    const mynote = localStorage.getItem("mynote");
-    console.log(mynote);
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route>

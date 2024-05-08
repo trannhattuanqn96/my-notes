@@ -57,9 +57,7 @@ const ModalCreate = (prop) => {
             setCurrValueTag("");
         }
     };
-    useEffect(() => {
-        console.log(tag);
-    }, [tag]);
+    
 
     const handleChange = (e) => {
         setCurrValueTag(e.target.value);
@@ -68,7 +66,6 @@ const ModalCreate = (prop) => {
     const handleDelete = (item, index) => {
         let arr = [...tag];
         arr.splice(index, 1);
-        console.log(item);
         setTag(arr);
     };
     return (
