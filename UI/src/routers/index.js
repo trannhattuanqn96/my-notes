@@ -30,7 +30,7 @@ const Router = () => {
                 <Route path="/notes" element={<Notes />} />
                 <Route path="/notes/:id" element={<DetailNote />} />
 
-                <Route path="*" element={<Navigate to="/admin/login" />} />
+                <Route path="*" element={<Navigate to="/notes" />} />
             </Route>
         )
     );
