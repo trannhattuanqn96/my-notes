@@ -7,7 +7,7 @@ if (process.env.REACT_APP_ENVIRONMENT === 'dev') {
     }
 } else {
     dataConfig = {
-        baseURLAPI: 'http://tuandevzz77.site/api'
+        baseURLAPI: 'http://api.tuandevzz77.site'
     }
 }
 
