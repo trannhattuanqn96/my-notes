@@ -23,6 +23,8 @@ jobs:
         working-directory: ./API
         run: |
           npm install
+          sudo su 
+          npm install -g nodemon
           cp .env.copy .env
           nodemon src/app.js
 
