@@ -27,8 +27,11 @@ const port = process.env.PORT || 4000;
 //   }
 // }));
 
+// const corsOptions = {
+//   origin: 'http://notes.tuandevzz77.site/', // Chỉ cho phép truy cập từ domain này
+// };
 const corsOptions = {
-  origin: 'http://notes.tuandevzz77.site/', // Chỉ cho phép truy cập từ domain này
+  origin: '*', // Chỉ cho phép truy cập từ domain này
 };
 
 app.use(cors(corsOptions));
