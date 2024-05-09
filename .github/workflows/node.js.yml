@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: seft-host #cài đặt seft-host
+    runs-on: self-hosted
     strategy: #build
       matrix:
         node-version: [18.x]
