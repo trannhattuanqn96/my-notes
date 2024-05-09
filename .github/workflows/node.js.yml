@@ -22,11 +22,8 @@ jobs:
       - name: install yarn
         working-directory: ./API
         run: |
-          npm install --global yarn
-          yarn
-          sudo npm install add pm2 -g
+          npm install nodemon
           cp .env.copy .env
-          sudo su
-          pm2 start src/app.js
+          nodemon src/app.js
 
 
