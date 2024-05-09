@@ -3,13 +3,13 @@ name: Node.js CI
 on:
   push:
     branches:
-      - master
+      - main
   # pull_request:
   #   branches: [ main ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest #cài đặt seft-host
+    runs-on: seft-host #cài đặt seft-host
     strategy: #build
       matrix:
         node-version: [20.x]
