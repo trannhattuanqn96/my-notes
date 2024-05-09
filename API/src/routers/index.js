@@ -7,7 +7,7 @@ import {
 } from "../controller/Notes.controller.js";
 const useRoutes = (app) => {
     app.get("/", (req, res) => {
-        res.send("Welcome to the Node.js Tutorial! - ");
+        res.send("Welcome to the Node.js Tutorial! - test ");
     });
 
     app.use(`/login`, loginRouter);
