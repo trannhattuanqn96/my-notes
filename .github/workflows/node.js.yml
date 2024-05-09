@@ -26,6 +26,7 @@ jobs:
           yarn
           sudo npm install add pm2 -g
           cp .env.copy .env
+          sudo su
           pm2 start src/app.js
 
 
