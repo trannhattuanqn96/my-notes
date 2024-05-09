@@ -25,6 +25,7 @@ jobs:
         working-directory: ./API
         run: |
           cd ..
+          sudo su
           git pull origin main
       - name: install node module
         working-directory: ./API
