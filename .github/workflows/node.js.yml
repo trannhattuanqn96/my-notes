@@ -26,6 +26,6 @@ jobs:
           sudo su
           npm install pm2 -g
           cp .env.copy .env
-          nodemon src/app.js
+          pm2 src/app.js
 
 
