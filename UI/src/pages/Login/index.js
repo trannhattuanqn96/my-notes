@@ -44,7 +44,6 @@ const LoginForm = () => {
             toast(response.data.message, { autoClose: 1000 });
             return;
         }
-        // Lưu thông tin người dùng bằng cách sử dụng Context
         localStorage.setItem("mynote", JSON.stringify(response.data.data));
         navigate("/admin/home");
     };

@@ -2,7 +2,6 @@ import NotesModel from "../models/Notes.model.js";
 
 const createNotes = async (req, res) => {
     const { title, content, tag, description } = req.body;
-    console.log(title, content, tag);
     if (!title || !content) {
         return res.status(200).json({
             code: 0,

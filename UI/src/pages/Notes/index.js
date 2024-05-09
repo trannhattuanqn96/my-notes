@@ -20,7 +20,7 @@ const Notes = () => {
         <>
             <ToastContainer />
             <div className="h-screen bg-[#1F2028]">
-                <div className="pt-40 px-40">
+                <div className="pt-40 md:px-20 px-4">
                     {getList?.map((item) => {
                         return (
                             <div

@@ -33,7 +33,7 @@ const Home = () => {
     useEffect(() => {
         const getnotes = async (search) => {
             try {
-                // Thực hiện các công việc bất đồng bộ ở đây
+                
                 const response = await getNotes(search);
                 if (response.data.code === 0) {
                     toast("Không lấy được nội dung!", { autoClose: 1000 });
@@ -45,8 +45,8 @@ const Home = () => {
                 // Xử lý lỗi nếu có
             }
         };
-        getnotes(search); // Gọi hàm async
-    }, [refesh]); // Đảm bảo useEffect chỉ chạy một lần khi component được render
+        getnotes(search); 
+    }, [refesh]); 
 
     const handleCreateNote = () => {
         setIsOpenModalCreate(true);
@@ -62,7 +62,7 @@ const Home = () => {
         setIsOpenModalEdit(true);
     };
     const handleLogout = () =>{
-        // Xóa mục trong localStorage và chuyển hướng đến "/login"
+       
         localStorage.removeItem("mynote");
         navigate('/admin/login')
     }

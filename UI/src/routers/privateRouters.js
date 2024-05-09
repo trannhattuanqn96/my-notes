@@ -1,6 +1,5 @@
 //src/components/PrivateRoute.tsx
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-// import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { verifyToken } from "../service/authAPI";
 

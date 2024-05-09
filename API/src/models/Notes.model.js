@@ -46,7 +46,6 @@ const getNotes = async (search) => {
             };
             getData = await Notes.find(searchConditions);
         }
-        console.log(getData);
         return {
             code: 1,
             message: "Get data success",

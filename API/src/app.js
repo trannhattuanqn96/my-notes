@@ -14,7 +14,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 // enable CORS
 var corsOptions = {
-  origin: ["http://notes.tuandevzz77.site/", "http://localhost:3000"],
+  origin: ["http://notes.tuandevzz77.site/", "http://localhost:3002"],
 }
 app.use(cors(corsOptions));
 // parse application/json
@@ -31,7 +31,6 @@ mongoose
     console.log("connected database");
   })
   .catch((err) => console.log(err));
-console.log(process.env.PASSWORD)
 const initAccount = async () => {
   const hashPass = await bcrypt.hash(process.env.PASSWORD, 10);
   try {
