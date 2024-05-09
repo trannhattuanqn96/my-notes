@@ -21,4 +21,4 @@ jobs:
     #     node-version: ${{ matrix.node-version }}
     #     cache: 'npm'
     - run: yarn 
-      working-directory: ../API
+      working-directory: API
