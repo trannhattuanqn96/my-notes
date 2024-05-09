@@ -22,6 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: pull code
+        working-directory: my-notes
         run: git pull
       - name: install node module
         working-directory: ./API
