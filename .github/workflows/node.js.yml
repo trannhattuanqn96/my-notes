@@ -22,6 +22,7 @@ jobs:
       - name: install yarn
         working-directory: ./API
         run: |
+          sudo su
           npm install
           npm install pm2 -g
           cp .env.copy .env
