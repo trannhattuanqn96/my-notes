@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: seft-host #cài đặt seft-host
+    runs-on: ubuntu-latest #cài đặt seft-host
     # strategy: #build
     #   matrix:
     #     node-version: [20.x]
