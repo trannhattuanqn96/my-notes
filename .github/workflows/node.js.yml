@@ -21,4 +21,4 @@ jobs:
     #     node-version: ${{ matrix.node-version }}
     #     cache: 'npm'
     - run: yarn 
-      working-directory: /var/www/my-notes/API
+      working-directory: ../API
