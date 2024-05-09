@@ -12,11 +12,20 @@ jobs:
     runs-on: self-hosted
     strategy: #build
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn
+      - name: install yarn
+        working-directory: ./API
+        run: |
+          npm install --global yarn
+          yarn
+          yarn global add pm2
+          cp .env.copy .env
+          pm2 start ./src/app.js
+
+
