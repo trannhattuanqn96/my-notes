@@ -23,7 +23,6 @@ jobs:
         working-directory: ./API
         run: |
           npm install
-          sudo su 
           npm install pm2 -g
           cp .env.copy .env
           nodemon src/app.js
