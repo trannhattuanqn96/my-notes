@@ -29,5 +29,8 @@ jobs:
           git pull origin main
       - name: install node module
         working-directory: ./API
-        run: yarn
+        run: |
+          yarn
+          pm2 stop app
+          pm2 start app
       
