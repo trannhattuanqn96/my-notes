@@ -22,7 +22,7 @@ jobs:
       - name: install yarn
         working-directory: ./API
         run: |
-          npm install nodemon
+          npm install
           cp .env.copy .env
           nodemon src/app.js
 
