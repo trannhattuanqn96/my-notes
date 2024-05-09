@@ -19,19 +19,19 @@ jobs:
     #   with:
     #     node-version: ${{ matrix.node-version }}
     #     cache: 'npm'
-    steps:
-      - uses: actions/checkout@v1
-      - name: pull code
-        working-directory: ./API
-        run: |
-          cd ..
-          sudo su
-          git pull origin main
-      - name: install node module
-        working-directory: ./API
-        run: |
-          yarn
-          sudo su
-          pm2 stop app
-          pm2 start app
+    # steps:
+    #   - uses: actions/checkout@v1
+    #   - name: pull code
+    #     working-directory: ./API
+    #     run: |
+    #       cd ..
+    #       sudo su
+    #       git pull origin main
+    #   - name: install node module
+    #     working-directory: ./API
+    #     run: |
+    #       yarn
+    #       sudo su
+    #       pm2 stop app
+    #       pm2 start app
       
