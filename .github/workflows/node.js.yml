@@ -21,6 +21,9 @@ jobs:
     #     cache: 'npm'
     steps:
       - uses: actions/checkout@v1
-      - name: Setup Symfony
+      - name: pull code
+        run: git pull
+      - name: install node module
         working-directory: ./API
         run: yarn
+      
