@@ -20,7 +20,5 @@ jobs:
     #   with:
     #     node-version: ${{ matrix.node-version }}
     #     cache: 'npm'
-    - run: sudo su
-    - run: cd /
-    - run: cd var/www/my-notes/API
     - run: yarn 
+      working-directory: /var/www/my-notes/API
