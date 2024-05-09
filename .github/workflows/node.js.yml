@@ -22,8 +22,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: pull code
-        working-directory: ../
-        run: git pull
+        working-directory: ./API
+        run: |
+          cd ..
+          git pull origin main
       - name: install node module
         working-directory: ./API
         run: yarn
