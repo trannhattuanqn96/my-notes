@@ -19,13 +19,21 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: install yarn
+      - name: build API
         working-directory: ./API
         run: |
           npm install
           sudo su
           npm install pm2 -g
           cp .env.copy .env
-          pm2 start src/app.js
+          pm2 reload src/app.js
+      - name: build UI
+        working-directory: ./UI
+        run: |
+          npm install
+          cp .env.copy .env
+          sudo sudo
+          sed -i 's/REACT_APP_ENVIRONMENT=dev/REACT_APP_ENVIRONMENT=production/g' .env
+          npm run build
 
 
