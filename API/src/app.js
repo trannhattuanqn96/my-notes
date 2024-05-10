@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import cors from "cors";
+import cors, { CorsOptions } from 'cors';
 import bodyParser from "body-parser";
 import useRoutes from "./routers/index.js";
 import mongoose from "mongoose";
@@ -13,10 +13,27 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-var corsOptions = {
-  origin: "http://notes.tuandevzz77.site/",
-}
-app.use(cors(corsOptions));
+// var corsOptions = {
+//   origin: "http://notes.tuandevzz77.site/",
+// }
+// app.use(cors(corsOptions));
+
+const corsOption = {
+  credentials: true,
+  origin: 'http://notes.tuandevzz77.site',
+  allowedHeaders: [
+    'Origin',
+    'Content-Type',
+    'Accept',
+    'x-access-token',
+    'authorization',
+    'x-signature',
+  ],
+  methods: 'GET, HEAD, OPTIONS, PUT, PATCH, POST, DELETE',
+  preflightContinue: false,
+};
+app.use(cors(corsOption));
+
 // parse application/json
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
