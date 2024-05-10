@@ -21,18 +21,17 @@ const ModelEdit = (prop) => {
     const { setRefesh } = useContext(AuthContext);
     const { modalIsOpen, setIsOpenModal, noteEdit } = prop;
     const editorRef = useRef(null);
-    const [title, setTitle] = useState(noteEdit[0]?.title);
-    const [tag, setTag] = useState(noteEdit[0]?.tag);
+    const [title, setTitle] = useState(noteEdit?.title);
+    const [tag, setTag] = useState(noteEdit?.tag);
     const [currValueTag, setCurrValueTag] = useState("");
-    const [description, setDescription] = useState(noteEdit[0]?.description);
-
+    const [description, setDescription] = useState(noteEdit?.description);
     const handleEditNote = async () => {
         if (!title || !editorRef.current.getContent()) {
             toast("Tiêu đề không được để trống", { autoClose: 1000 });
             return;
         }
         const createNote = await updateDetailNoteById({
-            id: noteEdit[0]?._id,
+            id: noteEdit?._id,
             title,
             content: editorRef.current.getContent(),
             tag,
@@ -48,9 +47,9 @@ const ModelEdit = (prop) => {
         setDescription(null);
     };
     useEffect(() => {
-        setTitle(noteEdit[0]?.title)
-        setTag(noteEdit[0]?.tag)
-        setDescription(noteEdit[0]?.description)
+        setTitle(noteEdit?.title)
+        setTag(noteEdit?.tag)
+        setDescription(noteEdit?.description)
     },[modalIsOpen])
     const handleKeyUpTag = (e) => {
         if (e.keyCode === 32) {
@@ -130,7 +129,7 @@ const ModelEdit = (prop) => {
                             <EditorTiny
                                 editorRef={editorRef}
                                 checkEdit={true}
-                                initContent={noteEdit[0]?.content}
+                                initContent={noteEdit?.content}
                             />
                         </Form>
                     </ModalDescription>

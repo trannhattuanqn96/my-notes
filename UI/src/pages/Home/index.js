@@ -12,7 +12,7 @@ import ModalCreate from "../../component/ModalCreate.js";
 import AuthContext from "../../context/authContext/RefeshProvider.js";
 import ModelEdit from "../../component/ModelEdit.js";
 import { Button } from "@nextui-org/react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Home = () => {
     useEffect(() => {
         const getnotes = async (search) => {
             try {
-                
+
                 const response = await getNotes(search);
                 if (response.data.code === 0) {
                     toast("Không lấy được nội dung!", { autoClose: 1000 });
@@ -45,24 +45,25 @@ const Home = () => {
                 // Xử lý lỗi nếu có
             }
         };
-        getnotes(search); 
-    }, [refesh]); 
+        getnotes(search);
+    }, [refesh]);
 
     const handleCreateNote = () => {
         setIsOpenModalCreate(true);
     };
     const getNoteEdit = useCallback(
         (note) => {
-            return data.map((item) => (item._id === note ? item : []));
+            const foundItem = data.find(function (item) {
+                return item._id === note;
+            });
+            return foundItem
         },
-        [isOpenModalEdit]
+        [isOpenModalEdit, note]
     );
-
     const handleEditNote = () => {
         setIsOpenModalEdit(true);
     };
-    const handleLogout = () =>{
-       
+    const handleLogout = () => {
         localStorage.removeItem("mynote");
         navigate('/admin/login')
     }
