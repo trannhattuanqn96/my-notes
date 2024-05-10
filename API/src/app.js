@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import cors, { CorsOptions } from 'cors';
+import cors from 'cors';
 import bodyParser from "body-parser";
 import useRoutes from "./routers/index.js";
 import mongoose from "mongoose";
