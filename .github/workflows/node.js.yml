@@ -32,7 +32,7 @@ jobs:
         run: |
           npm install
           cp .env.copy .env
-          sudo sudo
+          sudo su
           sed -i 's/REACT_APP_ENVIRONMENT=dev/REACT_APP_ENVIRONMENT=production/g' .env
           npm run build
 
