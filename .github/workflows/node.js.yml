@@ -26,7 +26,7 @@ jobs:
           sudo su
           npm install pm2 -g
           cp .env.copy .env
-          pm2 reload src/app.js
+          pm2 reload app
       - name: build UI
         working-directory: ./UI
         run: |
