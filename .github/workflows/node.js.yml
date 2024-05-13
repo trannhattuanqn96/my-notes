@@ -30,7 +30,7 @@ jobs:
       - name: run pm2
         run: |
           sudo su
-          pm2 restart notesAPI
+          pm2 restart notes
       # - name: build UI
       #   working-directory: ./UI
       #   run: |
