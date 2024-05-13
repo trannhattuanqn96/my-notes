@@ -30,12 +30,12 @@ jobs:
       - name: run pm2
         working-directory: ./API
         run: bash run.sh
-      - name: build UI
-        working-directory: ./UI
-        run: |
-          npm install
-          cp .env.copy .env
-          sed -i 's/REACT_APP_ENVIRONMENT=dev/REACT_APP_ENVIRONMENT=production/g' .env
-          npm run build
+      # - name: build UI
+      #   working-directory: ./UI
+      #   run: |
+      #     npm install
+      #     cp .env.copy .env
+      #     sed -i 's/REACT_APP_ENVIRONMENT=dev/REACT_APP_ENVIRONMENT=production/g' .env
+      #     npm run build
 
 
