@@ -7,7 +7,7 @@ import {
 } from "../controller/Notes.controller.js";
 const useRoutes = (app) => {
     app.get("/", (req, res) => {
-        res.send(`Hi, tuantrandevzz77.site : ${process.env.PASSWORD.ENV}: `);
+        res.send(`Hi, tuantrandevzz77.site : ${process.env.ENV}: `);
     });
 
     app.use(`/login`, loginRouter);
