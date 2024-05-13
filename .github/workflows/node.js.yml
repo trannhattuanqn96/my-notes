@@ -31,8 +31,9 @@ jobs:
         working-directory: ./UI
         run: |
           npm install
+          npm install yarn
           cp .env.copy .env
           sed -i 's/REACT_APP_ENVIRONMENT=dev/REACT_APP_ENVIRONMENT=production/g' .env
-          npm run build
+          yarn run build
 
 
