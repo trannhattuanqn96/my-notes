@@ -27,7 +27,7 @@ jobs:
           cp .env.copy .env
           sudo su
           chmod -R 777 .env
-          pm2 restart notesAPI
+          sudo pm2 restart notesAPI
       # - name: build UI
       #   working-directory: ./UI
       #   run: |
