@@ -7,7 +7,7 @@ import {
 } from "../controller/Notes.controller.js";
 const useRoutes = (app) => {
     app.get("/", (req, res) => {
-        res.send("Welcome to the abc.js ");
+        res.send("Welcome to the tuantran ");
     });
 
     app.use(`/login`, loginRouter);
