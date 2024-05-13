@@ -28,6 +28,10 @@ jobs:
           sudo su
           chmod -R 777 .env
           pm2 restart notesAPI
+      - name: run pm2
+        run: |
+          sudo su
+          pm2 restart notesAPI
       # - name: build UI
       #   working-directory: ./UI
       #   run: |
