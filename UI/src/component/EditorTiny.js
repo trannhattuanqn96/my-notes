@@ -9,9 +9,9 @@ const EditorTiny = ({ editorRef , checkEdit, initContent}) => {
             init={{
                 selector: "textarea",
                 plugins:
-                    "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker  textcolor ",
+                    "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker  textcolor pageembed",
                 toolbar:
-                    "undo redo |  fontsize | bold italic underline  forecolor backcolor | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight |  numlist bullist indent outdent | emoticons charmap | removeformat codesample",
+                    "undo redo |  fontsize | bold italic underline  forecolor backcolor | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight |  numlist bullist indent outdent | emoticons charmap | removeformat codesample pageembed",
                 content_style:
                     "body { background-color: #1A1A1A;color: white;  }",
                 codesample_global_prismjs: true,
