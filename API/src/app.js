@@ -20,7 +20,7 @@ const port = process.env.PORT || 4000;
 
 const corsOption = {
   credentials: true,
-  origin: 'http://notes.tuandevzz77.site',
+  origin: '*',
   allowedHeaders: [
     'Origin',
     'Content-Type',

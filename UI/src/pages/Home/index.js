@@ -70,7 +70,7 @@ const Home = () => {
     return (
         <>
             <ToastContainer />
-            <div className="h-screen bg-slate-500">
+            <div className="h-full bg-slate-500">
                 <div className=" container mx-auto w-8/12 mb-[20px] pt-[20px]">
                     <div className="flex gap-10 ">
                         <input

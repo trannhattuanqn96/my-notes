@@ -31,9 +31,8 @@ const DetailNote = () => {
 
     return (
         <>
-            <ToastContainer />
-            <div className="h-screen bg-[#1F2028]">
-                <div className="pt-40 md:px-20 px-4">
+            <div className=" bg-[#1F2028] ">
+                <div className="p-40 md:px-20 px-4  ">
                     <div className="text-[24px] text-white mb-10">
                         <Link
                             to={"/notes"}

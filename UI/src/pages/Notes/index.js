@@ -19,8 +19,8 @@ const Notes = () => {
     return (
         <>
             <ToastContainer />
-            <div className="h-screen bg-[#1F2028]">
-                <div className="pt-40 md:px-20 px-4">
+            <div className="h-full bg-[#1F2028]">
+                <div className="py-40 md:px-20 px-4">
                     {getList?.map((item) => {
                         return (
                             <div
