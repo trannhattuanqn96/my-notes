@@ -45,7 +45,7 @@ const DetailNote = () => {
                         <h1 className="text-yellow-400">{detailNote?.title}</h1>
                         {detailNote === null ? null : (
                             // <div dangerouslySetInnerHTML={{ __html: detailNote?.content }} />
-                            <div className="text-white [&_p]:!my-5 [&_ol]:!list-disc [&_ul]:!list-disc [&_ol>li]:!ml-5 [&_ul>li]:!ml-5">{parse(detailNote?.content)}</div>
+                            <div className="text-white [&_p]:!my-5 [&_p]:!leading-6 [&_ul]:!leading-6 [&_ol]:!list-disc [&_ul]:!list-disc [&_ol>li]:!ml-5 [&_ul>li]:!ml-5">{parse(detailNote?.content)}</div>
                         )}
                     </div>
                 </div>
